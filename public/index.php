@@ -15,6 +15,8 @@
     <?php include('../public/header.php'); ?>
     <!-- Login script -->
     <?php include('../controllers/LoginController.php'); ?>
+    <!-- Google OAuth -->
+    <?php include('../config/google_oauth.php'); ?>
     <!-- Login form -->
     <div class="App">
         <div class="vertical-center">
@@ -38,6 +40,15 @@
                         class="btn btn-outline-primary btn-lg btn-block">Sign
                         in</button>
                 </form>
+                <?php
+                    if(isset($_GET['code']))
+                        {
+                            googleauth($_GET['code']);
+                        }
+                    else{
+                            echo "<a href= '" . $client->createAuthUrl() . "'>Login with Google</a>";
+                        }
+                ?>
             </div>
         </div>
     </div>

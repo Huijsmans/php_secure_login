@@ -1,7 +1,7 @@
 <?php
-   
     // Database connection
     include('../config/db.php');
+
     global $wrongPwdErr, $accountNotExistErr, $emailPwdErr, $verificationRequiredErr, $email_empty_err, $pass_empty_err;
     if(isset($_POST['login'])) {
         $email_signin        = $_POST['email_signin'];
@@ -77,5 +77,18 @@
                         </div>";
             }            
         }
+    }
+
+    function googleauth($code){
+        include('../config/google_oauth.php');
+        $token = $client->fetchAccessTokenWithAuthCode($code);
+        $client->setAccessToken($token);
+        
+        //Getting user profile
+        $gauth = new Google\Service\Oauth2($client);
+        $google_info = $gauth->userinfo->get();
+        $_SESSION['Google_Email'] = $google_info->email;
+        $_SESSION['Google_Name'] = $google_info->name;
+        header("Location: ./dashboard.php");
     }
 ?>

@@ -1,5 +1,5 @@
 <?php include('../config/db.php'); ?>
-<?php if(!isset($_SESSION ['id'])) { header ("Location: index.php"); } ?> 
+<?php if(!isset($_SESSION ['id']) && !isset($_SESSION['Google_Name'])) { header ("Location: index.php"); } ?> 
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,6 +22,9 @@
                         <?php echo $_SESSION['lastname']; ?></h6>
                     <p class="card-text">Email address: <?php echo $_SESSION['email']; ?></p>
                     <p class="card-text">Mobile number: <?php echo $_SESSION['mobilenumber']; ?></p>
+                    <p class="card-text">Google Email: <?php echo $_SESSION['Google_Email']; ?></p>
+                    <p class="card-text">Google Name: <?php echo $_SESSION['Google_Name']; ?></p>
+
                     
                     <a class="btn btn-danger btn-block" href="logout.php">Log out</a>
                 </div>
